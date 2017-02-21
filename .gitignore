@@ -1,0 +1,4 @@
+.vagrant/
+*.log
+composer-setup.php
+playbook.retry

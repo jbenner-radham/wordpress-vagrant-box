@@ -1,0 +1,6 @@
+---
+mariadb:
+  db:       wordpress
+  user:     wordpress
+  password: wordpress
+  host:     localhost

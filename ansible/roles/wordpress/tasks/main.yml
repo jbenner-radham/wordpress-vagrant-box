@@ -1,0 +1,33 @@
+---
+- name:        Remove the Old Server Index
+  file:        path={{ apache.docroot }}/index.html
+               state=absent
+
+- name:        Download WP-CLI
+  get_url:     url=https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+               dest=/usr/local/bin/wp
+
+- name:        Make WP-CLI Executable
+  file:        path=/usr/local/bin/wp
+               mode=755
+
+- name:        Download WordPress
+  command:     wp core download --path='{{ apache.docroot }}' \
+                   --allow-root \
+                   --force
+
+- name:        Configure WordPress
+  command:     wp core config --path='{{ apache.docroot }}' \
+                   --dbname='{{ mariadb.db }}' \
+                   --dbuser='{{ mariadb.user }}' \
+                   --dbpass='{{ mariadb.password }}' \
+                   --dbhost='{{ mariadb.host }}' \
+                   --allow-root \
+                   --force
+
+- name:        Set Permissions for WordPress Files
+  file:        path={{ apache.docroot }}
+               owner=www-data
+               group=www-data
+               recurse=yes
+               state=directory

@@ -1,0 +1,10 @@
+---
+- hosts:  all
+  become: true  # Perform the following tasks as "sudo".
+  roles:
+    - apt
+    - apache
+    - git
+    - mariadb
+    - php
+    - wordpress
