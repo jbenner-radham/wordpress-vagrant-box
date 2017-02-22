@@ -1,24 +1,29 @@
 ---
-- name:           Set Locale for PHP PPA
-  locale_gen:     name=en_US.UTF-8
+- name: Set Locale for PHP PPA
+  locale_gen:
+    name: en_US.UTF-8
 
-- name:           Add PHP PPA
-  apt_repository: repo='ppa:ondrej/php'
+- name: Add PHP PPA
+  apt_repository:
+    repo: 'ppa:ondrej/php'
 
-- name:           Install PHP
-  apt:            name=php7.1-fpm
-                  update_cache=yes
+- name: Install PHP
+  apt:
+    name: php7.1-fpm
+    update_cache: yes
+    cache_valid_time: 3600
 
-- name:           Install PHP Modules
-  apt:            name={{ item }}
+- name: Install PHP Modules
+  apt:
+    name: '{{ item }}'
   with_items:
     - php7.1-curl
     - php7.1-mysql
     - php7.1-xml    # RSS feed on the front page requires this for operation.
     - php7.1-xmlrpc # Required for WP JetPack.
 
-- name:          Enable PHP Modules
-  shell:         phpenmod {{ item }}
+- name: Enable PHP Modules
+  shell: phpenmod {{ item }}
   with_items:
     - curl
     - json
@@ -27,18 +32,21 @@
     - mysqlnd
     - xml
     - xmlrpc
-  notify:        Restart PHP-FPM
+  notify: Restart PHP-FPM
 
-- name:          Download Composer Installer
-  get_url:       url=https://getcomposer.org/installer
-                 dest=/tmp/composer-setup.php
-                 checksum='sha384:55d6ead61b29c7bdee5cccfb50076874187bd9f21f65d8991d46ec5cc90518f447387fb9f76ebae1fbbacf329e583e30'
+- name: Download Composer Installer
+  get_url:
+    url: https://getcomposer.org/installer
+    dest: /tmp/composer-setup.php
+    checksum: 'sha384:55d6ead61b29c7bdee5cccfb50076874187bd9f21f65d8991d46ec5cc90518f447387fb9f76ebae1fbbacf329e583e30'
 
-- name:          Install Composer
-  shell:         php /tmp/composer-setup.php --filename=composer --install-dir=/usr/local/bin
+- name: Install Composer
+  shell: php /tmp/composer-setup.php --filename=composer \
+           --install-dir=/usr/local/bin
   args:
     creates: /usr/local/bin/composer
 
-- name:          Remove Composer Installer
-  file:          path=/tmp/composer-setup.php
-                 state=absent
+- name: Remove Composer Installer
+  file:
+    path: /tmp/composer-setup.php
+    state: absent
