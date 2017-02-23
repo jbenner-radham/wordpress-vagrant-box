@@ -12,12 +12,13 @@
 - name: Make WP-CLI Executable
   file:
     path: /usr/local/bin/wp
-    mode: 755
+    mode: 0755
 
 - name: Download WordPress
   command: wp core download --path='{{ apache.docroot }}' \
              --allow-root \
              --force
+  changed_when: False
 
 - name: Configure WordPress
   command: wp core config --path='{{ apache.docroot }}' \
@@ -27,6 +28,7 @@
              --dbhost='{{ mariadb.host }}' \
              --allow-root \
              --force
+  changed_when: False
 
 - name: Set Permissions for WordPress Files
   file:

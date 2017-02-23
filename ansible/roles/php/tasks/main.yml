@@ -23,7 +23,7 @@
     - php7.1-xmlrpc # Required for WP JetPack.
 
 - name: Enable PHP Modules
-  shell: phpenmod {{ item }}
+  command: phpenmod {{ item }}
   with_items:
     - curl
     - json
@@ -32,6 +32,7 @@
     - mysqlnd
     - xml
     - xmlrpc
+  changed_when: False
   notify: Restart PHP-FPM
 
 - name: Download Composer Installer
@@ -41,8 +42,8 @@
     checksum: 'sha384:55d6ead61b29c7bdee5cccfb50076874187bd9f21f65d8991d46ec5cc90518f447387fb9f76ebae1fbbacf329e583e30'
 
 - name: Install Composer
-  shell: php /tmp/composer-setup.php --filename=composer \
-           --install-dir=/usr/local/bin
+  command: php /tmp/composer-setup.php --filename=composer \
+             --install-dir=/usr/local/bin
   args:
     creates: /usr/local/bin/composer
 
