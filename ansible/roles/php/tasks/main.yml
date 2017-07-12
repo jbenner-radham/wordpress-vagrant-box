@@ -35,11 +35,17 @@
   changed_when: False
   notify: Restart PHP-FPM
 
+- name: Get Composer Installer Signature
+  uri:
+    url: https://composer.github.io/installer.sig
+    return_content: yes
+  register: composer_installer_signature
+
 - name: Download Composer Installer
   get_url:
     url: https://getcomposer.org/installer
     dest: /tmp/composer-setup.php
-    checksum: 'sha384:55d6ead61b29c7bdee5cccfb50076874187bd9f21f65d8991d46ec5cc90518f447387fb9f76ebae1fbbacf329e583e30'
+    checksum: 'sha384:{{composer_installer_signature.content}}'
 
 - name: Install Composer
   command: php /tmp/composer-setup.php --filename=composer \
