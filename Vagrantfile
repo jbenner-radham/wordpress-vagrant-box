@@ -6,6 +6,8 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure(2) do |config|
+  ports = {host: 8080}
+
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
@@ -22,7 +24,7 @@ Vagrant.configure(2) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 80, host: ports[:host]
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -71,4 +73,12 @@ Vagrant.configure(2) do |config|
   config.vm.provision "ansible_local" do |ansible|
     ansible.playbook = "ansible/playbook.yml"
   end
+
+  #config.vm.post_up_message = "The WordPress dev instance " \
+  #                            "is now available at: "       \
+  #                            "<http://localhost:#{ports[:host]}/>."
+
+  config.vm.post_up_message = <<~MSG
+    The WordPress dev instance is now available at <http://localhost:#{ports[:host]}/>.
+  MSG
 end
