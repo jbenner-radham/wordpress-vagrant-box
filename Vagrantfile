@@ -74,10 +74,6 @@ Vagrant.configure(2) do |config|
     ansible.playbook = "ansible/playbook.yml"
   end
 
-  #config.vm.post_up_message = "The WordPress dev instance " \
-  #                            "is now available at: "       \
-  #                            "<http://localhost:#{ports[:host]}/>."
-
   config.vm.post_up_message = <<~MSG
     The WordPress dev instance is now available at <http://localhost:#{ports[:host]}/>.
   MSG
