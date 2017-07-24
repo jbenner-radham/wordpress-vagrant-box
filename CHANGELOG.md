@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ------------
 ### Added
 - Added empty `ansible.cfg` file.
+- Added a `README.md` for ad-hoc Ansible provisioning.
 
 ### Changed
 - Added the "virtual" directive to the Apache Fast CGI alias config.
