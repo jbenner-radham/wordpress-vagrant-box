@@ -9,7 +9,7 @@
 
 - name: Install PHP
   apt:
-    name: php7.1-fpm
+    name: php7.2-fpm
     update_cache: yes
     cache_valid_time: 3600
 
@@ -17,10 +17,10 @@
   apt:
     name: '{{ item }}'
   with_items:
-    - php7.1-curl
-    - php7.1-mysql
-    - php7.1-xml    # RSS feed on the front page requires this for operation.
-    - php7.1-xmlrpc # Required for WP JetPack.
+    - php7.2-curl
+    - php7.2-mysql
+    - php7.2-xml    # RSS feed on the front page requires this for operation.
+    - php7.2-xmlrpc # Required for WP JetPack.
 
 - name: Enable PHP Modules
   command: phpenmod {{ item }}

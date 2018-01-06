@@ -46,13 +46,13 @@
     #Include conf-available/serve-cgi-bin.conf
 
     <IfModule mod_fastcgi.c>
-        AddHandler php7.1-fcgi .php
-        Action php7.1-fcgi /php7.1-fcgi
-        Alias /php7.1-fcgi /usr/lib/cgi-bin/php7.1-fcgi
-        FastCgiExternalServer /usr/lib/cgi-bin/php7.1-fcgi -socket /var/run/php/php7.1-fpm.sock -pass-header Authorization
+        AddHandler php7.2-fcgi .php
+        Action php7.2-fcgi /php7.2-fcgi
+        Alias /php7.2-fcgi /usr/lib/cgi-bin/php7.2-fcgi
+        FastCgiExternalServer /usr/lib/cgi-bin/php7.2-fcgi -socket /var/run/php/php7.2-fpm.sock -pass-header Authorization
     </IfModule>
 
-    # NOTE: using `/usr/lib/cgi-bin/php7.1-fcgi` here does not work, it doesn't exist in the filesystem!
+    # NOTE: using `/usr/lib/cgi-bin/php7.2-fcgi` here does not work, it doesn't exist in the filesystem!
     <Directory /usr/lib/cgi-bin>
         Require all granted
     </Directory>
