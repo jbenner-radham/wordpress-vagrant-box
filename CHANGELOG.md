@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [Unreleased]
 ------------
 ### Added
-- Now installs MySQLdb for Python 3 as well as 2.
+- Now installs the appropriate MySQLdb for Python 2 or 3 based upon runtime info.
 - Added default variable for PHP file max upload size.
 
 [0.2.0] - 2018-01-06

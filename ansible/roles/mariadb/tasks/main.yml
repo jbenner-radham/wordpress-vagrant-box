@@ -3,12 +3,15 @@
   apt:
     name: mariadb-server
 
-- name: Install Python MySQLdb (for Ansible)
+- name: Install Python 2 MySQLdb (for Ansible)
   apt:
-    name: '{{ item }}'
-  with_items:
-    - python-mysqldb
-    - python3-mysqldb
+    name: python-mysqldb
+  when: ansible_python.version.major|int == 2
+
+- name: Install Python 3 MySQLdb (for Ansible)
+  apt:
+    name: python3-mysqldb
+  when: ansible_python.version.major|int == 3
 
 - name: Create Database User
   mysql_user:
