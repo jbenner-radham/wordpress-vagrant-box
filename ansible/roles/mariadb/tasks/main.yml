@@ -5,7 +5,10 @@
 
 - name: Install Python MySQLdb (for Ansible)
   apt:
-    name: python-mysqldb
+    name: '{{ item }}'
+  with_items:
+    - python-mysqldb
+    - python3-mysqldb
 
 - name: Create Database User
   mysql_user:

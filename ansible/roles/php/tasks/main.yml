@@ -13,6 +13,13 @@
     update_cache: yes
     cache_valid_time: 3600
 
+- name: Change PHP Upload Max Filesize
+  lineinfile:
+    path: /etc/php/7.2/fpm/php.ini
+    regexp: '^upload_max_filesize[ ]*=[ ]*(\d+[a-zA-Z]+)$'
+    line: 'upload_max_filesize = {{ php.upload_max_filesize }}'
+  notify: Restart PHP-FPM
+
 - name: Install PHP Modules
   apt:
     name: '{{ item }}'
