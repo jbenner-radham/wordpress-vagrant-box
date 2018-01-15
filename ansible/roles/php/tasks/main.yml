@@ -25,6 +25,7 @@
     name: '{{ item }}'
   with_items:
     - php7.2-curl
+    - php7.2-gd     # Required for image cropping.
     - php7.2-mysql
     - php7.2-xml    # RSS feed on the front page requires this for operation.
     - php7.2-xmlrpc # Required for WP JetPack.
