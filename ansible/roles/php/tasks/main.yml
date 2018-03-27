@@ -25,10 +25,11 @@
     name: '{{ item }}'
   with_items:
     - php7.2-curl
-    - php7.2-gd     # Required for image cropping.
+    - php7.2-gd       # Required for image cropping.
+    - php7.2-mbstring
     - php7.2-mysql
-    - php7.2-xml    # RSS feed on the front page requires this for operation.
-    - php7.2-xmlrpc # Required for WP JetPack.
+    - php7.2-xml      # RSS feed on the front page requires this for operation.
+    - php7.2-xmlrpc   # Required for WP JetPack.
 
 - name: Enable PHP Modules
   command: phpenmod {{ item }}
