@@ -18,6 +18,8 @@
     name: '{{ item }}'
   with_items:
     - php7.2-curl
+    - php7.2-gd
+    - php7.2-mbstring
     - php7.2-mysql
     - php7.2-xml    # RSS feed on the front page requires this for operation.
     - php7.2-xmlrpc # Required for WP JetPack.
@@ -27,9 +29,9 @@
   with_items:
     - curl
     - json
-    - opcache
     - mysqli
     - mysqlnd
+    - opcache
     - xml
     - xmlrpc
   changed_when: False
