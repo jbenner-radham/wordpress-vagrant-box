@@ -1,2 +1,4 @@
 ---
 # defaults file for php
+php:
+  upload_max_filesize: 2M
